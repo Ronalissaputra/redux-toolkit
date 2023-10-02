@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProduk, getProdukById } from "../api/produk/produkService";
+import {
+  createProduk,
+  getProduk,
+  getProdukById,
+} from "../api/produk/produkService";
 
 const initialState = {
   data: [],
@@ -10,7 +14,6 @@ const initialState = {
 const produkSlice = createSlice({
   name: "produk",
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProduk.pending, (state) => {
@@ -34,6 +37,18 @@ const produkSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getProdukById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(createProduk.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(createProduk.fulfilled, (state, action) => {
+        state.status = "success";
+        state.data.push(action.payload);
+      })
+      .addCase(createProduk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { FallingLines, Radio, RevolvingDot } from "react-loader-spinner";
 import { motion } from "framer-motion";
 
-const Homepage = () => {
+const Berandapage = () => {
   const dispatch = useDispatch();
   const { data, status, error } = useSelector((state) => state.produk);
 
@@ -105,4 +105,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Berandapage;

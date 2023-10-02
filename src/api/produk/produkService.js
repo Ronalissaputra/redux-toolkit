@@ -13,3 +13,11 @@ export const getProdukById = createAsyncThunk(
     return response.data;
   }
 );
+
+export const createProduk = createAsyncThunk(
+  "produk/createProduk",
+  async (data) => {
+    const response = await axiosInstance.post("products/add", data);
+    return response.data;
+  }
+);
